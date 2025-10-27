@@ -1,0 +1,27 @@
+name: Flutter CI
+on:
+ push:
+    branches: [ main, develop ]
+ pull_request:
+    branches: [ main ]
+
+jobs:
+ build:
+  runs-on: macos-latest
+
+  steps:
+   - name: Checkout Repository
+     uses: actions/checkout@v4
+
+   # SDK 설치를 지원하는 모듈 같은 개념 
+   - name: Setup Flutter
+     uses: subosito/flutter-action@v2
+     with:
+      # 프로젝트 Flutter 버전 맞춰서
+      flutter-version: '3.35.6'
+
+   - name: Install Packages
+     run: flutter pub get
+
+   - run: flutter run
+  
